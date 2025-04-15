@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Potencia de Números</title>
+  <title>Potencia y Raíz de Números</title>
   <script>
     let base, exponente;
 
@@ -17,7 +17,16 @@
     function calcularPotencia() {
       if (base !== undefined && exponente !== undefined) {
         const resultado = Math.pow(base, exponente);
-        document.getElementById('resultado').textContent = `Resultado: ${resultado}`;
+        document.getElementById('resultado').textContent = `Resultado (Potencia): ${resultado}`;
+      } else {
+        document.getElementById('resultado').textContent = 'Primero genera los números.';
+      }
+    }
+
+    function calcularRaiz() {
+      if (base !== undefined && exponente !== undefined) {
+        const resultado = Math.pow(base, 1 / exponente); // Cálculo de la raíz
+        document.getElementById('resultado').textContent = `Resultado (Raíz): ${resultado.toFixed(2)}`;
       } else {
         document.getElementById('resultado').textContent = 'Primero genera los números.';
       }
@@ -25,10 +34,11 @@
   </script>
 </head>
 <body>
-  <h1>Calculadora de Potencias</h1>
+  <h1>Calculadora de Potencias y Raíces</h1>
   <p id="operacion">Presiona el botón para generar los números</p>
   <p id="resultado"></p>
   <button onclick="generarNumeros()">Generar Números</button>
   <button onclick="calcularPotencia()">Calcular Potencia</button>
+  <button onclick="calcularRaiz()">Calcular Raíz</button>
 </body>
 </html>
