@@ -5,20 +5,30 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Potencia de Números</title>
   <script>
-    function calcularPotencia() {
-      const base = Math.floor(Math.random() * 10) + 1; // Número aleatorio entre 1 y 10
-      const exponente = Math.floor(Math.random() * 5) + 1; // Número aleatorio entre 1 y 5
-      const resultado = Math.pow(base, exponente);
+    let base, exponente;
 
-      document.getElementById('operacion').textContent = `${base} ^ ${exponente}`;
-      document.getElementById('resultado').textContent = `Resultado: ${resultado}`;
+    function generarNumeros() {
+      base = Math.floor(Math.random() * 10) + 1; // Número aleatorio entre 1 y 10
+      exponente = Math.floor(Math.random() * 5) + 1; // Número aleatorio entre 1 y 5
+      document.getElementById('operacion').textContent = `Base: ${base}, Exponente: ${exponente}`;
+      document.getElementById('resultado').textContent = ''; // Limpiar resultado previo
+    }
+
+    function calcularPotencia() {
+      if (base !== undefined && exponente !== undefined) {
+        const resultado = Math.pow(base, exponente);
+        document.getElementById('resultado').textContent = `Resultado: ${resultado}`;
+      } else {
+        document.getElementById('resultado').textContent = 'Primero genera los números.';
+      }
     }
   </script>
 </head>
 <body>
   <h1>Calculadora de Potencias</h1>
-  <p id="operacion">Presiona el botón para generar la operación</p>
+  <p id="operacion">Presiona el botón para generar los números</p>
   <p id="resultado"></p>
+  <button onclick="generarNumeros()">Generar Números</button>
   <button onclick="calcularPotencia()">Calcular Potencia</button>
 </body>
 </html>
