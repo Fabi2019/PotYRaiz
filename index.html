@@ -4,20 +4,23 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Potencia y Raíz de Números</title>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
   <script>
     let base, exponente;
 
     function generarNumeros() {
       base = Math.floor(Math.random() * 10) + 1; // Número aleatorio entre 1 y 10
       exponente = Math.floor(Math.random() * 5) + 1; // Número aleatorio entre 1 y 5
-      document.getElementById('operacion').textContent = `Base: ${base}, Exponente: ${exponente}`;
+      document.getElementById('operacion').innerHTML = `Base: \\(${base}\\), Exponente: \\(${exponente}\\)`;
       document.getElementById('resultado').textContent = ''; // Limpiar resultado previo
+      MathJax.typeset(); // Renderizar las expresiones matemáticas
     }
 
     function calcularPotencia() {
       if (base !== undefined && exponente !== undefined) {
         const resultado = Math.pow(base, exponente);
-        document.getElementById('resultado').textContent = `Resultado (Potencia): ${resultado}`;
+        document.getElementById('resultado').innerHTML = `Resultado (Potencia): \\(${base}^{${exponente}} = ${resultado}\\)`;
+        MathJax.typeset(); // Renderizar las expresiones matemáticas
       } else {
         document.getElementById('resultado').textContent = 'Primero genera los números.';
       }
@@ -26,7 +29,8 @@
     function calcularRaiz() {
       if (base !== undefined && exponente !== undefined) {
         const resultado = Math.pow(base, 1 / exponente); // Cálculo de la raíz
-        document.getElementById('resultado').textContent = `Resultado (Raíz): ${resultado.toFixed(2)}`;
+        document.getElementById('resultado').innerHTML = `Resultado (Raíz): \\(\\sqrt[${exponente}]{${base}} = ${resultado.toFixed(2)}\\)`;
+        MathJax.typeset(); // Renderizar las expresiones matemáticas
       } else {
         document.getElementById('resultado').textContent = 'Primero genera los números.';
       }
