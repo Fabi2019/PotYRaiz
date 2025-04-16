@@ -5,34 +5,55 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Potencia y Raíz de Números</title>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  <style>
+    button {
+      background-color: green;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      margin: 5px;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+    button:hover {
+      background-color: darkgreen;
+    }
+  </style>
   <script>
-    let base, exponente;
+    let base, exponente, operacionSeleccionada;
 
     function generarNumeros() {
       base = Math.floor(Math.random() * 10) + 1; // Número aleatorio entre 1 y 10
       exponente = Math.floor(Math.random() * 5) + 1; // Número aleatorio entre 1 y 5
       document.getElementById('operacion').innerHTML = `Base: \\(${base}\\), Exponente: \\(${exponente}\\)`;
       document.getElementById('resultado').textContent = ''; // Limpiar resultado previo
+      operacionSeleccionada = null; // Reiniciar operación seleccionada
       MathJax.typeset(); // Renderizar las expresiones matemáticas
     }
 
-    function calcularPotencia() {
-      if (base !== undefined && exponente !== undefined) {
-        const resultado = Math.pow(base, exponente);
-        document.getElementById('resultado').innerHTML = `Resultado (Potencia): \\(${base}^{${exponente}} = ${resultado}\\)`;
-        MathJax.typeset(); // Renderizar las expresiones matemáticas
-      } else {
-        document.getElementById('resultado').textContent = 'Primero genera los números.';
+    function seleccionarOperacion(operacion) {
+      operacionSeleccionada = operacion;
+      if (operacion === 'potencia') {
+        document.getElementById('resultado').innerHTML = `Operación seleccionada: \\(${base}^{${exponente}}\\)`;
+      } else if (operacion === 'raiz') {
+        document.getElementById('resultado').innerHTML = `Operación seleccionada: \\(\\sqrt[${exponente}]{${base}}\\)`;
       }
+      MathJax.typeset(); // Renderizar las expresiones matemáticas
     }
 
-    function calcularRaiz() {
-      if (base !== undefined && exponente !== undefined) {
-        const resultado = Math.pow(base, 1 / exponente); // Cálculo de la raíz
-        document.getElementById('resultado').innerHTML = `Resultado (Raíz): \\(\\sqrt[${exponente}]{${base}} = ${resultado.toFixed(2)}\\)`;
+    function realizarCalculo() {
+      if (base !== undefined && exponente !== undefined && operacionSeleccionada) {
+        let resultado;
+        if (operacionSeleccionada === 'potencia') {
+          resultado = Math.pow(base, exponente);
+          document.getElementById('resultado').innerHTML = `Resultado (Potencia): \\(${base}^{${exponente}} = ${resultado}\\)`;
+        } else if (operacionSeleccionada === 'raiz') {
+          resultado = Math.pow(base, 1 / exponente);
+          document.getElementById('resultado').innerHTML = `Resultado (Raíz): \\(\\sqrt[${exponente}]{${base}} = ${resultado.toFixed(2)}\\)`;
+        }
         MathJax.typeset(); // Renderizar las expresiones matemáticas
       } else {
-        document.getElementById('resultado').textContent = 'Primero genera los números.';
+        document.getElementById('resultado').textContent = 'Primero selecciona una operación.';
       }
     }
   </script>
@@ -42,7 +63,8 @@
   <p id="operacion">Presiona el botón para generar los números</p>
   <p id="resultado"></p>
   <button onclick="generarNumeros()">Generar Números</button>
-  <button onclick="calcularPotencia()">Calcular Potencia</button>
-  <button onclick="calcularRaiz()">Calcular Raíz</button>
+  <button onclick="seleccionarOperacion('potencia')">Seleccionar Potencia</button>
+  <button onclick="seleccionarOperacion('raiz')">Seleccionar Raíz</button>
+  <button onclick="realizarCalculo()">Realizar Cálculo</button>
 </body>
 </html>
